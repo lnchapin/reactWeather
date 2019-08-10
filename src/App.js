@@ -9,11 +9,16 @@ import data from './components/data/sample.json';
 
 class App extends Component{
   state = {
-    days:data.data
+    days:data.data,
+    selectedDay: null
   }
 
   componentDidMount(){
 
+  }
+
+  selectDay = day =>{
+    this.setState({ selectedDay: day});
   }
 
   render(){
@@ -34,11 +39,22 @@ class App extends Component{
             dewpt={day.dewpt}
             icon={day.weather.icon}
             alt={day.weather.description}
+            selectDay={()=>this.selectDay(day)}
             />
           ))}
         </Row>
-        <Row>
-          <DayDetail />
+        <Row> {this.state.selectedDay ? (<DayDetail
+          key={this.state.selectedDay.ts}
+          current={this.state.selectedDay.temp}
+          high={this.state.selectedDay.max_temp}
+          low={this.state.selectedDay.min_temp}
+          pricp={this.state.selectedDay.pop}
+          day={moment(this.state.selectedDay.datetime, 'YYYY-MM-DD').format('dddd')}
+          dewpt={this.state.selectedDay.dewpt}
+          icon={this.state.selectedDay.weather.icon}
+          alt={this.state.selectedDay.weather.description}
+        />):<h2>Please select a day for a detailed view</h2>}
+
         </Row>
       </Container>
     );

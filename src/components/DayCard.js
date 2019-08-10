@@ -3,7 +3,6 @@ import { Col, Card, CardHeader, CardBody } from 'reactstrap';
 import styled from 'styled-components'
 
 const CardWrapper = styled.div`
-  color: turquoise;
   .card{
     background: papayawhip;
     h3{
@@ -20,7 +19,7 @@ const DayCard = props =>{
   console.log(props);
   return(
     <Col>
-      <CardWrapper>
+      <CardWrapper onClick={props.selectDay}>
         <Card>
           <CardHeader>{props.day}</CardHeader>
           <CardBody>
