@@ -5,16 +5,29 @@ import DayCard from './components/DayCard';
 import DayDetail from './components/DayDetail';
 import Header from './components/Header';
 import data from './components/data/sample.json';
+import API from './utils/API'
 
 
 class App extends Component{
   state = {
     days:data.data,
-    selectedDay: null
+    selectedDay: null,
+    searchedLocation:''
   }
 
   componentDidMount(){
+    this.getWeather("Denver, CO")
+  }
 
+  getWeather = location =>{
+    API.getWeather(location)
+    .then(res=> {
+      this.setState({
+        days: res.data.data,
+        searchedLocation:`${res.data.city_name}`
+      })
+    })
+    .catch(err => console.log(err))
   }
 
   selectDay = day =>{
@@ -25,7 +38,7 @@ class App extends Component{
     return (
       <Container>
         <Row>
-          <Header />
+          <Header location={this.state.searchedLocation}/>
         </Row>
         <Row>
           {this.state.days.map(day =>(
