@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import DayCard from './components/DayCard';
+import DayDetail from './components/DayDetail';
+import Header from './components/Header';
+import { Container, Row } from 'reactstrap';
+import data from './components/data/sample.json';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+console.log(data);
+
+class App extends Component{
+  state = {
+    days:data.data
+  }
+
+  render(){
+    return (
+      <Container>
+        <Row>
+          <Header />
+        </Row>
+        <Row>
+          {this.state.days.map(day =>(
+            <DayCard key={day.ts}/>
+          ))}
+        </Row>
+        <Row>
+          <DayDetail />
+        </Row>
+      </Container>
+    );
+  }
 }
 
 export default App;
