@@ -39,22 +39,23 @@ class App extends Component{
             dewpt={day.dewpt}
             icon={day.weather.icon}
             alt={day.weather.description}
+            isActive={this.state.selectedDay === day}
             selectDay={()=>this.selectDay(day)}
             />
           ))}
         </Row>
-        <Row> {this.state.selectedDay ? (<DayDetail
+        <Row>
+          {this.state.selectedDay ? (<DayDetail
           key={this.state.selectedDay.ts}
           current={this.state.selectedDay.temp}
           high={this.state.selectedDay.max_temp}
           low={this.state.selectedDay.min_temp}
           pricp={this.state.selectedDay.pop}
-          day={moment(this.state.selectedDay.datetime, 'YYYY-MM-DD').format('dddd')}
+          day={moment(this.state.selectedDay.datetime, 'YYYY-MM-DD').format('dddd, MM DD')}
           dewpt={this.state.selectedDay.dewpt}
           icon={this.state.selectedDay.weather.icon}
           alt={this.state.selectedDay.weather.description}
         />):<h2>Please select a day for a detailed view</h2>}
-
         </Row>
       </Container>
     );

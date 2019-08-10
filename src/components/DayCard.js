@@ -5,21 +5,32 @@ import styled from 'styled-components'
 const CardWrapper = styled.div`
   .card{
     background: papayawhip;
+    border: ${props=> props.isActive? '2px solid gray': '1px solid gray'};
+    cursor: pointer;
     h3{
       font-weight: 900;
     }
     img{
       width: 75px;
     }
+    .card-header{
+      background: ${props=> props.isActive? 'gray': null };
+      color: ${props=> props.isActive? 'white': null };
+      border-radius: 0;
+    }
+  }
+  :hover{
+    .card{
+      border: 2px solid gray;
+    }
   }
 `
 
 
 const DayCard = props =>{
-  console.log(props);
   return(
     <Col>
-      <CardWrapper onClick={props.selectDay}>
+      <CardWrapper onClick={props.selectDay} isActive={props.isActive}>
         <Card>
           <CardHeader>{props.day}</CardHeader>
           <CardBody>
